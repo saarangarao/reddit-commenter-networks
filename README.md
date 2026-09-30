@@ -25,7 +25,7 @@ Filters, in order:
 
 **Edges.** When comment *c* by user *u* is a reply to another comment (`parent_id` starts with `t1_`) written by a different user *v*, the directed edge *u → v* gets +1 weight:
 
-$$w_{uv} = \#\{\text{comments by } u \text{ that reply directly to } v\}$$
+$$w_{uv} = \{\text{number of comments by } u \text{ that reply directly to } v\}$$
 
 Edges with $w_{uv} < 3$ are dropped, so one-off exchanges don't count as ties. The result has **9,605 nodes and 16,702 edges**.
 

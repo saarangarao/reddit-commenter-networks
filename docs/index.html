@@ -6,19 +6,18 @@
 <title>A2C Reply Network</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
   :root {
-    --ground: #0a0a0f;
-    --surface: #14131f;
-    --surface-2: #1c1b2b;
+    --ground: #04040a;
+    --surface: #181818;
+    --surface-2: #181818;
     --ink: #e9e8f2;
-    --ink-2: #c3c0d6;
-    --muted: #918da8;
-    --rule: #262437;
-    --rule-strong: #3a3752;
-    --accent: #8f7dff;
-    --accent-soft: #1f1c34;
+    --ink-2: #ffffff;
+    --muted: #ffffff;
+    --rule: #000000;
+    --rule-strong: #000001;
+    --accent: #387939;
+    --accent-soft: #000000;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
   }
   * { box-sizing: border-box; }
@@ -26,43 +25,43 @@
     margin: 0;
     background: var(--ground);
     color: var(--ink-2);
-    font-family: "Source Serif 4", Georgia, serif;
+    font-family: "Times New Roman", Times, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
   }
-  h1, h2, .label, .mono, .stat { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+  h1, h2, .label, .mono, .stat { font-family: "Georgia", Times, sans-serif; }
   .page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; display: flex; flex-direction: column; gap: 1.75rem; }
   header { display: flex; flex-direction: column; gap: .6rem; border-bottom: 1px solid var(--rule-strong); padding-bottom: 1.5rem; }
-  .label { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .label { font-family: "Arial", ui-monospace, Menlo, monospace; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: none; color: var(--muted); }
   h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 700; letter-spacing: -.03em; color: var(--ink); margin: 0; text-wrap: balance; }
   .dek { font-size: 1.02rem; color: var(--muted); max-width: 68ch; margin: 0; }
 
   .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
   .controls { padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .9rem; border-bottom: 1px solid var(--rule); }
   .slider-row { display: flex; align-items: center; gap: 1rem; }
-  .slider-row label { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .78rem; color: var(--muted); white-space: nowrap; }
+  .slider-row label { font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .78rem; color: var(--muted); white-space: nowrap; }
   input[type="range"] { flex: 1; accent-color: var(--accent); height: 4px; }
-  .gamma-val { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 1.1rem; font-weight: 600; color: var(--accent); min-width: 3.2ch; text-align: right; }
+  .gamma-val { font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: 1.1rem; font-weight: 600; color: var(--accent); min-width: 3.2ch; text-align: right; }
 
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1px; background: var(--rule); }
   .stat { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .15rem; }
   .stat .num { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .stat .cap { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .stat .cap { font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 
   iframe { width: 100%; height: 760px; border: none; display: block; background: #0a0a0f; }
 
   .keywords { padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; }
   .kw-row { display: flex; align-items: baseline; gap: .6rem; font-size: .88rem; }
   .kw-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; margin-top: .3rem; }
-  .kw-row b { color: var(--ink); font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .78rem; }
-  .kw-row span.words { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .8rem; color: var(--muted); }
+  .kw-row b { color: var(--ink); font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .78rem; }
+  .kw-row span.words { font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .8rem; color: var(--muted); }
 
   .note { font-size: .88rem; color: var(--muted); padding: 0 .1rem; }
   .note strong { color: var(--ink-2); }
 
-  footer { border-top: 1px solid var(--rule-strong); padding-top: 1.2rem; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .72rem; color: var(--muted); line-height: 1.8; }
+  footer { border-top: 1px solid var(--rule-strong); padding-top: 1.2rem; font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .72rem; color: var(--muted); line-height: 1.8; }
   a { color: var(--accent); }
 
   @media (max-width: 620px) {
@@ -74,7 +73,7 @@
 <div class="page">
 
   <header>
-    <span class="label">r/ApplyingToCollege · reply network</span>
+    <span class="label">r/ApplyingToCollege: comment network</span>
     <h1>A2C Reply Network</h1>
     <p class="dek">Every user who repeatedly replies to another is an edge, weighted by how often it happened. Communities are found with Louvain at a resolution (γ) you set below — drag the slider between 9 precomputed snapshots.</p>
   </header>
@@ -92,7 +91,7 @@
     <div class="keywords" id="keywordsPanel"></div>
   </div>
 
-  <p class="note">This is a <strong>static snapshot gallery</strong>, not a live recomputation — moving the slider swaps between 9 precomputed pictures (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. For continuous parameter tuning with live recomputation, run the companion <span class="mono" style="font-family:'IBM Plex Mono',monospace">app.py</span> Streamlit dashboard instead — GitHub Pages can't run a live Python backend, so it can't host that version.</p>
+  <p class="note">This is a <strong>static snapshot gallery</strong>, not a live recomputation — moving the slider swaps between 9 precomputed pictures (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. For continuous parameter tuning with live recomputation, run the companion <span class="mono" style="font-family:'Georgia',monospace">app.py</span> Streamlit dashboard instead — GitHub Pages can't run a live Python backend, so it can't host that version.</p>
 
   <footer>
     Source: r_ApplyingToCollege_comments.jsonl (1.94M comments) · graph: 9,605 nodes, 16,702 edges · Louvain (networkx), seed 42<br>
