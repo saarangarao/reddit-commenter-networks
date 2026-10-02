@@ -1,5 +1,6 @@
 venv/
-.DS_Store/
+*.DS_Store
 *.jsonl
 __pycache__/
 graph_res6_clusters.html
+
