@@ -7,7 +7,7 @@ core of the largest communities, and labels each community with its most
 distinctive words.
 
 Examples:
-    python make_graph.py                                  # gamma=6, 10 communities, 200 per community
+    python make_graph.py                                  # gamma=6, 10 communities, 100 per community
     python make_graph.py -r 3 -c 8 -p 100                 # looser communities, smaller picture
     python make_graph.py -r 6 --color-by both -o out/g6   # out/g6_clusters.html + out/g6_roles.html
     python make_graph.py -r 6 --json g6.json              # also dump stats + keywords (docs/manifest.json format)
@@ -22,7 +22,6 @@ TF-IDF keywords read as real topics. Whatever you pick, report it: these are
 
 import argparse
 import collections
-import hashlib
 import json
 import math
 import os
@@ -86,14 +85,14 @@ def parse_args():
     p.add_argument("-c", "--communities", type=int, default=10,
                    help="How many of the largest communities to draw.")
 
-    # -p / --peel-to (int >= 1, default 200)
+    # -p / --peel-to (int >= 1, default 100 — same as the website and app.py)
     # Max members drawn per community. Bigger communities are "peeled": the
     # member with the weakest ties inside the community is removed one at a
     # time until this many remain, leaving the dense core. Smaller communities
     # are drawn whole. Purely a drawing choice — the TF-IDF keywords always use
     # the full community. Total nodes drawn <= communities x peel-to, a bit
     # less because nodes left with no edges are dropped.
-    p.add_argument("-p", "--peel-to", type=int, default=200,
+    p.add_argument("-p", "--peel-to", type=int, default=100,
                    help="Max members drawn per community (weakest-tied members dropped first).")
 
     # --min-size (int, default 30)
@@ -183,10 +182,6 @@ def parse_args():
     return args
 
 
-def anonymize(username):
-    return "user_" + hashlib.md5(username.encode()).hexdigest()[:8]
-
-
 # ── Data loading ─────────────────────────────────────────────────────
 def load_data(data_dir):
     def load(name):
@@ -207,28 +202,15 @@ def load_data(data_dir):
               "Build it with the notebook's comment-text cache cell.", file=sys.stderr)
         return G, metrics_df, {}
 
-    return G, metrics_df, align_vocab_ids(G, user_word_counts)
-
-
-def align_vocab_ids(G, user_word_counts):
-    """The word cache and graph.pkl can disagree on ID scheme: an older kernel
-    applied anonymize() twice, so a cache built then is keyed by
-    anonymize(<graph id>). Detect that and re-key, rather than silently
-    producing a legend with no words in it."""
-    nodes = set(G.nodes())
-    direct = sum(1 for n in nodes if n in user_word_counts)
-    if direct >= 0.5 * len(nodes):
-        return user_word_counts
-
-    remapped = {n: user_word_counts[anonymize(n)] for n in nodes if anonymize(n) in user_word_counts}
-    if len(remapped) > direct:
-        print(f"note: user_word_counts.pkl is keyed by double-hashed IDs; "
-              f"re-keyed {len(remapped):,}/{len(nodes):,} users to match graph.pkl", file=sys.stderr)
-        return remapped
-
-    print(f"warning: only {direct:,}/{len(nodes):,} graph users have word counts — "
-          f"user_word_counts.pkl is probably stale; rebuild it.", file=sys.stderr)
-    return user_word_counts
+    # If the cache was built from a different graph.pkl (or with a different
+    # anonymize()), its user IDs won't match and every legend comes out empty
+    # with no error — so say so loudly.
+    matched = sum(1 for n in G if n in user_word_counts)
+    if matched < 0.5 * G.number_of_nodes():
+        print(f"warning: only {matched:,}/{G.number_of_nodes():,} graph users have word counts — "
+              f"user_word_counts.pkl doesn't match graph.pkl; delete it and rebuild it "
+              f"with the notebook's comment-text cache cell.", file=sys.stderr)
+    return G, metrics_df, user_word_counts
 
 
 # ── Communities and the drawn subgraph ───────────────────────────────
@@ -336,11 +318,14 @@ def legend_html(title, rows):
     )
 
 
-def render(G, H, node_comm, metrics_df, color_by, legend, filename):
-    # in_line embeds vis-network in the file, so the HTML works on its own
-    # without the lib/ folder next to it
-    net = Network(height="800px", width="100%", directed=False,
-                  bgcolor="#0a0a0f", font_color="#e8e8f0", cdn_resources="in_line")
+def render(G, H, node_comm, metrics_df, color_by, legend, filename,
+           cdn_resources="in_line", height="800px"):
+    """legend: HTML from legend_html(), or None for no legend.
+    cdn_resources: "in_line" embeds vis-network so the file works on its own
+    without the lib/ folder next to it; "remote" loads it from a CDN instead
+    (smaller files — used for the website's snapshots)."""
+    net = Network(height=height, width="100%", directed=False,
+                  bgcolor="#0a0a0f", font_color="#e8e8f0", cdn_resources=cdn_resources)
 
     pr = metrics_df.set_index("user")["pagerank"].to_dict()
     roles = metrics_df.set_index("user")["role"].to_dict()
@@ -377,7 +362,8 @@ def render(G, H, node_comm, metrics_df, color_by, legend, filename):
 
     net.set_options(PHYSICS)
     html = net.generate_html(notebook=False)
-    html = html.replace("<body>", "<body>\n" + legend, 1)
+    if legend:
+        html = html.replace("<body>", "<body>\n" + legend, 1)
 
     os.makedirs(os.path.dirname(os.path.abspath(filename)), exist_ok=True)
     with open(filename, "w", encoding="utf-8") as f:
@@ -385,12 +371,31 @@ def render(G, H, node_comm, metrics_df, color_by, legend, filename):
     print(f"wrote {filename}  (coloured by {color_by})")
 
 
+def summarize(G, H, node_comm, all_comms, resolution, keywords, file):
+    """Stats for one run, in the shape of a docs/manifest.json entry. Edges are
+    counted undirected (a reply pair in both directions is one line on screen)."""
+    UH = H.to_undirected()
+    n_edges = UH.number_of_edges()
+    intra = sum(1 for a, b in UH.edges() if node_comm[a] == node_comm[b])
+    return {
+        "gamma": resolution,
+        "file": file,
+        "communities_found": len(all_comms),
+        "nodes_drawn": H.number_of_nodes(),
+        "edges_drawn": n_edges,
+        "intra_pct": round(100 * intra / n_edges, 1) if n_edges else 0,
+        "coverage_pct": round(100 * H.number_of_nodes() / G.number_of_nodes(), 2),
+        "keywords": {str(ci): kws for ci, kws in keywords.items()},
+    }
+
+
 def main():
     args = parse_args()
     G, metrics_df, user_word_counts = load_data(args.data_dir)
     UG = G.to_undirected()
 
-    print(f"graph: {G.number_of_nodes():,} nodes, {G.number_of_edges():,} edges")
+    print(f"graph: {G.number_of_nodes():,} users, {G.number_of_edges():,} directed edges "
+          f"({UG.number_of_edges():,} reply pairs)")
     print(f"louvain: resolution={args.resolution:g}, seed={args.seed} ...")
     all_comms = find_communities(UG, args.resolution, args.seed, args.min_size)
     if not all_comms:
@@ -398,15 +403,13 @@ def main():
     drawn = all_comms[:args.communities]
 
     H, node_comm = build_subgraph(G, UG, drawn, args.peel_to)
-    UH = H.to_undirected()
-    n_edges = UH.number_of_edges()
-    intra = sum(1 for a, b in UH.edges() if node_comm[a] == node_comm[b])
-    print(f"{len(all_comms)} communities found (>= {args.min_size} members), drawing {len(drawn)} | "
-          f"{H.number_of_nodes()} nodes | {n_edges} edges | "
-          f"{(intra / n_edges if n_edges else 0):.1%} of edges intra-community")
-
     keywords = cluster_keywords(drawn, user_word_counts, args.keywords,
                                 args.min_users, args.min_corpus, args.stopwords)
+    entry = summarize(G, H, node_comm, all_comms, args.resolution, keywords,
+                      os.path.basename(f"{args.out}_clusters.html"))
+    print(f"{entry['communities_found']} communities found (>= {args.min_size} members), "
+          f"drawing {len(drawn)} | {entry['nodes_drawn']} nodes | {entry['edges_drawn']} edges | "
+          f"{entry['intra_pct']}% of edges intra-community")
     for ci, comm in enumerate(drawn):
         kws = keywords.get(ci)
         print(f"  cluster {ci} ({len(comm)} members): "
@@ -424,16 +427,6 @@ def main():
         render(G, H, node_comm, metrics_df, "role", legend, f"{args.out}_roles.html")
 
     if args.json:
-        entry = {
-            "gamma": args.resolution,
-            "file": os.path.basename(f"{args.out}_clusters.html"),
-            "communities_found": len(all_comms),
-            "nodes_drawn": H.number_of_nodes(),
-            "edges_drawn": n_edges,
-            "intra_pct": round(100 * intra / n_edges, 1) if n_edges else 0,
-            "coverage_pct": round(100 * H.number_of_nodes() / G.number_of_nodes(), 2),
-            "keywords": {str(ci): kws for ci, kws in keywords.items()},
-        }
         with open(args.json, "w", encoding="utf-8") as f:
             json.dump(entry, f, indent=2)
         print(f"wrote {args.json}")

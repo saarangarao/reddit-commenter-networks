@@ -91,10 +91,10 @@
     <div class="keywords" id="keywordsPanel"></div>
   </div>
 
-  <p class="note">This is a <strong>not</strong> a live recomputation. Moving the slider swaps between 9 precomputed graphs (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. Github pages unfortunately cannot host live recomputations with any resolution of your choosing.</p>
+  <p class="note">This is <strong>not</strong> a live recomputation. Moving the slider swaps between 9 precomputed graphs (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. GitHub Pages unfortunately cannot host live recomputations with any resolution of your choosing. To build a graph at any resolution yourself, run <code>make_graph.py</code> from the repo.</p>
 
   <footer>
-    <strong>Sources:</strong> r_ApplyingToCollege_comments.jsonl (1.94M comments) <br> - Original Graph: 9,605 nodes, 16,702 edges <br> - Louvain Method ( with networkx), seed 42<br>
+    <strong>Sources:</strong> r_ApplyingToCollege_comments.jsonl (1.94M comments) <br> - Original Graph: 9,605 users, 24,865 directed reply edges (16,701 reply pairs) <br> - Louvain Method ( with networkx), seed 42<br>
     - Node size = PageRank <br> - Edge Length/Thickness = reply weight (log-compressed) <br> - Legend Keywords = TF-IDF over each community's full membership and their comments
   </footer>
 

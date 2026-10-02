@@ -8,8 +8,9 @@ sensitivity — and see the graph and its keyword legend update live.
 Run locally:   streamlit run app.py
 Deploy live:   push this repo to GitHub, then deploy at streamlit.io/cloud
                (GitHub Pages can't run this — it's a live Python app, not a
-               static file. See static_site/ for a GitHub-Pages-compatible
-               precomputed version of the same visualization.)
+               static file. See docs/ (built by build_site.py) for a
+               GitHub-Pages-compatible precomputed version of the same
+               visualization, and make_graph.py for a command-line version.)
 """
 
 import collections
@@ -95,7 +96,7 @@ def global_stopwords(top_n=180):
 @st.cache_data(show_spinner=False)
 def cluster_keywords(resolution, n_communities, seed, min_users, min_corpus, k):
     """TF-IDF keywords per cluster, pooled from each community's FULL
-    membership (not the peeled/drawn subset — a 45-node sample is thin
+    membership (not the peeled/drawn subset — a 100-node sample is thin
     enough that one heavy poster can dominate a cluster's apparent topic).
     Smoothed idf (sklearn convention) so a word used in every cluster is
     down-weighted rather than deleted outright."""
@@ -261,8 +262,8 @@ st.sidebar.title("Parameters")
 resolution = st.sidebar.slider(
     "Resolution (γ)", 0.5, 10.0, 6.0, step=0.5,
     help="Higher = stricter about grouping hubs together, so communities split apart more. "
-         "gamma=6 tested best on this graph (see main.ipynb) across stability, community "
-         "count, and whether the resulting groups map to real topics.",
+         "gamma=6 finds the most communities on this graph (136) while staying stable "
+         "across random seeds (ARI above 0.8) — see main.ipynb.",
 )
 n_communities = st.sidebar.slider(
     "Communities to draw", 2, 20, 10,
@@ -337,7 +338,8 @@ if HAS_VOCAB and keywords:
 with st.expander("What am I looking at?"):
     st.markdown(
         """
-- **Node size** — PageRank within the drawn subgraph (bigger = more central).
+- **Node size** — PageRank over the whole reply graph, scaled to the largest
+  drawn node (bigger = more central).
 - **Edge thickness and length** — both driven by the same number, reply weight
   (how many times two people replied to each other). A thick, short edge is a
   strong tie; a thin, long edge is a weak one — vis-network ignores edge

@@ -3,192 +3,192 @@
     {
       "gamma": 1.0,
       "file": "graphs/res_1.0.html",
-      "communities_found": 32,
+      "communities_found": 34,
       "nodes_drawn": 1000,
-      "edges_drawn": 3754,
-      "intra_pct": 45.7,
+      "edges_drawn": 3108,
+      "intra_pct": 50.5,
       "coverage_pct": 10.41,
       "keywords": {
         "0": [
-          "scholarships",
           "applicant",
-          "merit",
+          "scholarships",
           "specific",
           "attend",
-          "transfer"
+          "merit",
+          "doesn"
         ],
         "1": [
           "law",
           "selective",
           "such",
+          "attend",
           "study",
-          "academic",
-          "attend"
+          "academic"
         ],
         "2": [
-          "ecs",
-          "columbia",
-          "went",
-          "community",
-          "person",
-          "didn't"
+          "cornell",
+          "bad",
+          "especially",
+          "didn't",
+          "stanford",
+          "rate"
         ],
         "3": [
+          "columbia",
+          "berkeley",
+          "ucla",
+          "prestige",
+          "cornell",
+          "duke"
+        ],
+        "4": [
           "post",
           "reddit",
           "results",
           "applyingtocollege",
           "comments",
-          "check"
+          "usc"
         ],
-        "4": [
+        "5": [
           "edu",
           "admission",
           "purdue",
           "data",
           "courses",
-          "common"
-        ],
-        "5": [
-          "columbia",
-          "berkeley",
-          "prestige",
-          "ucla",
-          "cornell",
-          "duke"
+          "alabama"
         ],
         "6": [
-          "merit",
-          "tuition",
-          "private",
-          "family",
-          "education",
-          "income"
+          "ecs",
+          "isn't",
+          "community",
+          "matter",
+          "bad",
+          "put"
         ],
         "7": [
-          "columbia",
-          "ucla",
-          "princeton",
           "stanford",
-          "berkeley",
-          "undergrad"
+          "didn",
+          "ecs",
+          "kid",
+          "app",
+          "stats"
         ],
         "8": [
-          "ucla",
-          "cornell",
-          "went",
-          "especially",
-          "bad",
-          "least"
+          "merit",
+          "kid",
+          "private",
+          "income",
+          "family",
+          "tuition"
         ],
         "9": [
-          "luck",
-          "hope",
-          "day",
-          "didn",
-          "thanks",
-          "interview"
+          "columbia",
+          "ecs",
+          "person",
+          "i've",
+          "didn't",
+          "went"
         ]
       }
     },
     {
       "gamma": 2.0,
       "file": "graphs/res_2.0.html",
-      "communities_found": 69,
+      "communities_found": 71,
       "nodes_drawn": 1000,
-      "edges_drawn": 2093,
-      "intra_pct": 61.0,
+      "edges_drawn": 1988,
+      "intra_pct": 63.0,
       "coverage_pct": 10.41,
       "keywords": {
         "0": [
           "applicant",
           "scholarships",
-          "attend",
           "specific",
           "merit",
+          "attend",
           "making"
         ],
         "1": [
-          "princeton",
-          "columbia",
-          "stanford",
-          "undergrad",
-          "berkeley",
-          "cornell"
-        ],
-        "2": [
-          "edu",
-          "purdue",
-          "data",
-          "alabama",
-          "admission",
-          "courses"
-        ],
-        "3": [
-          "columbia",
-          "berkeley",
-          "emory",
-          "ucla",
-          "prestige",
-          "washu"
-        ],
-        "4": [
-          "ucla",
-          "courses",
-          "admission",
-          "berkeley",
-          "csu",
-          "cal"
-        ],
-        "5": [
-          "i'd",
-          "study",
-          "attend",
-          "selective",
-          "admit",
-          "they're"
-        ],
-        "6": [
           "law",
           "such",
           "academic",
           "selective",
           "fact",
-          "sort"
+          "least"
+        ],
+        "2": [
+          "columbia",
+          "berkeley",
+          "prestige",
+          "cornell",
+          "duke",
+          "washu"
+        ],
+        "3": [
+          "i'd",
+          "study",
+          "attend",
+          "selective",
+          "admit",
+          "given"
+        ],
+        "4": [
+          "ucla",
+          "admission",
+          "courses",
+          "berkeley",
+          "csu",
+          "edu"
+        ],
+        "5": [
+          "results",
+          "reddit",
+          "post",
+          "applyingtocollege",
+          "comments",
+          "check"
+        ],
+        "6": [
+          "interview",
+          "didn",
+          "hope",
+          "thanks",
+          "stanford",
+          "post"
         ],
         "7": [
-          "didn't",
-          "ecs",
-          "matter",
-          "bad",
-          "least",
-          "uiuc"
+          "alabama",
+          "edu",
+          "news",
+          "went",
+          "team",
+          "isn't"
         ],
         "8": [
-          "luck",
-          "hope",
-          "day",
-          "email",
-          "decision",
-          "decisions"
+          "rate",
+          "didn't",
+          "uiuc",
+          "matter",
+          "isn't",
+          "ucla"
         ],
         "9": [
-          "check",
-          "you'll",
-          "won't",
-          "they're",
-          "looking",
-          "submit"
+          "merit",
+          "kid",
+          "private",
+          "income",
+          "tuition",
+          "family"
         ]
       }
     },
     {
       "gamma": 3.0,
       "file": "graphs/res_3.0.html",
-      "communities_found": 104,
+      "communities_found": 98,
       "nodes_drawn": 1000,
-      "edges_drawn": 1603,
-      "intra_pct": 69.4,
+      "edges_drawn": 1634,
+      "intra_pct": 68.4,
       "coverage_pct": 10.41,
       "keywords": {
         "0": [
@@ -200,20 +200,20 @@
           "extraordinarily"
         ],
         "1": [
-          "ucla",
-          "courses",
-          "admission",
-          "berkeley",
-          "csu",
-          "waitlist"
-        ],
-        "2": [
           "i'd",
           "study",
           "attend",
           "selective",
           "admit",
           "they're"
+        ],
+        "2": [
+          "ucla",
+          "courses",
+          "admission",
+          "berkeley",
+          "csu",
+          "edu"
         ],
         "3": [
           "check",
@@ -233,53 +233,53 @@
         ],
         "5": [
           "columbia",
-          "princeton",
-          "stanford",
           "undergrad",
+          "princeton",
+          "cornell",
           "berkeley",
           "grad"
         ],
         "6": [
-          "luck",
-          "email",
-          "hope",
-          "day",
-          "didn't",
-          "decisions"
+          "scholarships",
+          "transfer",
+          "won't",
+          "put",
+          "waitlist",
+          "start"
         ],
         "7": [
-          "merit",
-          "private",
-          "kid",
-          "income",
-          "tuition",
-          "scholarships"
+          "princeton",
+          "uva",
+          "georgetown",
+          "stanford",
+          "cornell",
+          "prestige"
         ],
         "8": [
-          "alabama",
-          "edu",
-          "news",
-          "team",
-          "national",
-          "scholarships"
+          "interview",
+          "didn",
+          "literally",
+          "doesn",
+          "post",
+          "hope"
         ],
         "9": [
-          "columbia",
-          "emory",
-          "washu",
-          "berkeley",
-          "brown",
-          "prestige"
+          "stanford",
+          "caltech",
+          "stats",
+          "didn",
+          "princeton",
+          "kid"
         ]
       }
     },
     {
       "gamma": 4.0,
       "file": "graphs/res_4.0.html",
-      "communities_found": 127,
+      "communities_found": 119,
       "nodes_drawn": 1000,
-      "edges_drawn": 1433,
-      "intra_pct": 75.7,
+      "edges_drawn": 1453,
+      "intra_pct": 72.7,
       "coverage_pct": 10.41,
       "keywords": {
         "0": [
@@ -288,14 +288,14 @@
           "specific",
           "attend",
           "extraordinarily",
-          "ability"
+          "merit"
         ],
         "1": [
           "ucla",
-          "courses",
           "admission",
-          "csu",
+          "courses",
           "berkeley",
+          "csu",
           "cal"
         ],
         "2": [
@@ -315,14 +315,30 @@
           "looking"
         ],
         "4": [
+          "stanford",
+          "caltech",
+          "stats",
+          "didn",
+          "princeton",
+          "kid"
+        ],
+        "5": [
           "columbia",
           "princeton",
           "undergrad",
-          "stanford",
-          "world",
+          "cornell",
+          "cmu",
           "grad"
         ],
-        "5": [
+        "6": [
+          "columbia",
+          "emory",
+          "washu",
+          "berkeley",
+          "brown",
+          "vanderbilt"
+        ],
+        "7": [
           "alabama",
           "edu",
           "news",
@@ -330,56 +346,40 @@
           "national",
           "scholarships"
         ],
-        "6": [
-          "undergrad",
-          "matter",
-          "uiuc",
-          "majors",
-          "isn't",
-          "world"
-        ],
-        "7": [
-          "columbia",
-          "emory",
-          "washu",
-          "berkeley",
-          "med",
-          "prestige"
-        ],
         "8": [
-          "emory",
-          "washu",
-          "cmu",
-          "med",
-          "uva",
-          "business"
+          "merit",
+          "private",
+          "income",
+          "price",
+          "scholarships",
+          "kid"
         ],
         "9": [
-          "luck",
-          "email",
-          "didn't",
-          "hope",
-          "day",
-          "decisions"
+          "such",
+          "sort",
+          "fact",
+          "least",
+          "sometimes",
+          "academic"
         ]
       }
     },
     {
       "gamma": 5.0,
       "file": "graphs/res_5.0.html",
-      "communities_found": 138,
-      "nodes_drawn": 990,
-      "edges_drawn": 1385,
-      "intra_pct": 74.5,
-      "coverage_pct": 10.31,
+      "communities_found": 123,
+      "nodes_drawn": 993,
+      "edges_drawn": 1357,
+      "intra_pct": 76.6,
+      "coverage_pct": 10.34,
       "keywords": {
         "0": [
           "applicant",
           "scholarships",
+          "extraordinarily",
           "specific",
           "attend",
-          "ability",
-          "merit"
+          "ability"
         ],
         "1": [
           "ucla",
@@ -406,12 +406,12 @@
           "option"
         ],
         "4": [
-          "columbia",
-          "princeton",
-          "undergrad",
           "stanford",
-          "berkeley",
-          "grad"
+          "caltech",
+          "kid",
+          "princeton",
+          "stats",
+          "didn"
         ],
         "5": [
           "alabama",
@@ -422,14 +422,6 @@
           "scholarships"
         ],
         "6": [
-          "purdue",
-          "ecs",
-          "community",
-          "least",
-          "luck",
-          "doesn"
-        ],
-        "7": [
           "such",
           "sort",
           "fact",
@@ -437,32 +429,40 @@
           "sometimes",
           "selective"
         ],
+        "7": [
+          "purdue",
+          "community",
+          "doesn",
+          "ecs",
+          "especially",
+          "taking"
+        ],
         "8": [
-          "columbia",
-          "washu",
-          "berkeley",
-          "prestige",
-          "duke",
-          "emory"
+          "undergrad",
+          "majors",
+          "matter",
+          "uiuc",
+          "ucla",
+          "washu"
         ],
         "9": [
-          "transfer",
-          "won't",
-          "waitlist",
           "scholarships",
-          "put",
-          "there's"
+          "merit",
+          "website",
+          "admission",
+          "app",
+          "common"
         ]
       }
     },
     {
       "gamma": 6.0,
       "file": "graphs/res_6.0.html",
-      "communities_found": 139,
-      "nodes_drawn": 976,
-      "edges_drawn": 1308,
-      "intra_pct": 77.6,
-      "coverage_pct": 10.16,
+      "communities_found": 136,
+      "nodes_drawn": 959,
+      "edges_drawn": 1257,
+      "intra_pct": 79.6,
+      "coverage_pct": 9.98,
       "keywords": {
         "0": [
           "applicant",
@@ -473,12 +473,12 @@
           "ability"
         ],
         "1": [
+          "ucla",
           "courses",
           "admission",
-          "ucla",
           "csu",
-          "edu",
-          "cal"
+          "berkeley",
+          "edu"
         ],
         "2": [
           "i'd",
@@ -497,14 +497,6 @@
           "option"
         ],
         "4": [
-          "caltech",
-          "stanford",
-          "princeton",
-          "please",
-          "ivies",
-          "went"
-        ],
-        "5": [
           "alabama",
           "edu",
           "team",
@@ -512,7 +504,7 @@
           "national",
           "scholarships"
         ],
-        "6": [
+        "5": [
           "such",
           "sort",
           "fact",
@@ -520,21 +512,29 @@
           "sometimes",
           "selective"
         ],
+        "6": [
+          "purdue",
+          "community",
+          "umich",
+          "ecs",
+          "doesn",
+          "post"
+        ],
         "7": [
-          "uva",
-          "georgetown",
-          "prestige",
-          "duke",
-          "dartmouth",
-          "ucla"
+          "email",
+          "luck",
+          "hope",
+          "decisions",
+          "didn't",
+          "decision"
         ],
         "8": [
-          "transfer",
-          "california",
-          "ucla",
-          "admission",
-          "berkeley",
-          "ucs"
+          "columbia",
+          "princeton",
+          "undergrad",
+          "grad",
+          "cmu",
+          "stanford"
         ],
         "9": [
           "transfer",
@@ -549,16 +549,16 @@
     {
       "gamma": 7.0,
       "file": "graphs/res_7.0.html",
-      "communities_found": 131,
-      "nodes_drawn": 907,
-      "edges_drawn": 1169,
-      "intra_pct": 79.3,
-      "coverage_pct": 9.44,
+      "communities_found": 128,
+      "nodes_drawn": 918,
+      "edges_drawn": 1176,
+      "intra_pct": 79.5,
+      "coverage_pct": 9.56,
       "keywords": {
         "0": [
           "applicant",
-          "scholarships",
           "extraordinarily",
+          "scholarships",
           "specific",
           "attend",
           "ability"
@@ -572,20 +572,20 @@
           "pick"
         ],
         "2": [
-          "courses",
-          "admission",
-          "csu",
-          "ucla",
-          "edu",
-          "berkeley"
-        ],
-        "3": [
           "check",
           "you'll",
           "won't",
           "submit",
           "looking",
           "option"
+        ],
+        "3": [
+          "courses",
+          "admission",
+          "csu",
+          "ucla",
+          "edu",
+          "berkeley"
         ],
         "4": [
           "email",
@@ -596,22 +596,6 @@
           "decision"
         ],
         "5": [
-          "transfer",
-          "won't",
-          "waitlist",
-          "scholarships",
-          "put",
-          "there's"
-        ],
-        "6": [
-          "such",
-          "sort",
-          "fact",
-          "sometimes",
-          "least",
-          "selective"
-        ],
-        "7": [
           "alabama",
           "edu",
           "team",
@@ -619,48 +603,64 @@
           "national",
           "scholarships"
         ],
+        "6": [
+          "stanford",
+          "caltech",
+          "berkeley",
+          "didn",
+          "please",
+          "doesn"
+        ],
+        "7": [
+          "transfer",
+          "won't",
+          "waitlist",
+          "scholarships",
+          "put",
+          "there's"
+        ],
         "8": [
+          "such",
+          "sort",
+          "fact",
+          "sometimes",
+          "least",
+          "selective"
+        ],
+        "9": [
           "columbia",
           "princeton",
           "undergrad",
           "cmu",
           "grad",
           "there's"
-        ],
-        "9": [
-          "merit",
-          "income",
-          "private",
-          "tuition",
-          "scholarships",
-          "family"
         ]
       }
     },
     {
       "gamma": 8.0,
       "file": "graphs/res_8.0.html",
-      "communities_found": 128,
-      "nodes_drawn": 897,
-      "edges_drawn": 1149,
-      "intra_pct": 79.8,
-      "coverage_pct": 9.34,
+      "communities_found": 130,
+      "nodes_drawn": 885,
+      "edges_drawn": 1121,
+      "intra_pct": 79.9,
+      "coverage_pct": 9.21,
       "keywords": {
         "0": [
           "applicant",
-          "scholarships",
           "extraordinarily",
+          "scholarships",
           "specific",
           "attend",
           "ability"
         ],
         "1": [
-          "courses",
-          "admission",
-          "csu",
-          "ucla",
-          "edu",
-          "berkeley"
+          "i'd",
+          "study",
+          "attend",
+          "selective",
+          "admit",
+          "pick"
         ],
         "2": [
           "check",
@@ -671,28 +671,28 @@
           "looking"
         ],
         "3": [
-          "i'd",
-          "study",
-          "attend",
-          "selective",
-          "admit",
-          "pick"
+          "courses",
+          "admission",
+          "csu",
+          "ucla",
+          "edu",
+          "weighted"
         ],
         "4": [
-          "email",
-          "luck",
-          "hope",
-          "decisions",
-          "didn't",
-          "decision"
-        ],
-        "5": [
           "alabama",
           "edu",
           "team",
           "news",
           "national",
           "scholarships"
+        ],
+        "5": [
+          "email",
+          "luck",
+          "hope",
+          "didn't",
+          "decisions",
+          "decision"
         ],
         "6": [
           "such",
@@ -704,19 +704,19 @@
         ],
         "7": [
           "transfer",
-          "won't",
           "waitlist",
+          "won't",
           "scholarships",
-          "put",
-          "there's"
+          "there's",
+          "put"
         ],
         "8": [
-          "merit",
-          "income",
-          "private",
-          "tuition",
-          "scholarships",
-          "family"
+          "caltech",
+          "stanford",
+          "didn",
+          "please",
+          "ivies",
+          "merit"
         ],
         "9": [
           "columbia",
@@ -731,16 +731,16 @@
     {
       "gamma": 10.0,
       "file": "graphs/res_10.0.html",
-      "communities_found": 115,
-      "nodes_drawn": 855,
-      "edges_drawn": 1078,
-      "intra_pct": 80.0,
-      "coverage_pct": 8.9,
+      "communities_found": 117,
+      "nodes_drawn": 851,
+      "edges_drawn": 1064,
+      "intra_pct": 80.5,
+      "coverage_pct": 8.86,
       "keywords": {
         "0": [
           "applicant",
-          "extraordinarily",
           "scholarships",
+          "extraordinarily",
           "specific",
           "attend",
           "ability"
@@ -778,12 +778,12 @@
           "decision"
         ],
         "5": [
-          "such",
-          "sort",
-          "fact",
-          "sometimes",
-          "least",
-          "selective"
+          "transfer",
+          "waitlist",
+          "won't",
+          "scholarships",
+          "there's",
+          "put"
         ],
         "6": [
           "alabama",
@@ -794,12 +794,12 @@
           "scholarships"
         ],
         "7": [
-          "transfer",
-          "waitlist",
-          "won't",
-          "scholarships",
-          "there's",
-          "put"
+          "such",
+          "sort",
+          "fact",
+          "sometimes",
+          "least",
+          "selective"
         ],
         "8": [
           "merit",
@@ -810,16 +810,14 @@
           "family"
         ],
         "9": [
-          "won't",
-          "depends",
-          "transcript",
-          "question",
-          "grade",
-          "common"
+          "columbia",
+          "princeton",
+          "undergrad",
+          "cmu",
+          "grad",
+          "there's"
         ]
       }
     }
-  ],
-  "n_communities_drawn": 10,
-  "peel_to": 100
+  ]
 }
