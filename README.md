@@ -184,11 +184,56 @@ cd docs && python3 -m http.server
 # open http://localhost:8000
 ```
 
-**Publishing:** in the repo's Settings → Pages, choose "Deploy from a branch", then `main` and `/docs`.
-
 **Adding or changing a snapshot:** create the graph HTML with the pipeline from sections 3 to 6 at the new γ (100 members per community, 10 communities), put it in `docs/graphs/`, and add a matching entry to `manifest.json`. `index.html` doesn't need any changes. The script that produced the current snapshots isn't in this repo; `app.py`'s `build_subgraph`, `cluster_keywords` and `render_html` have the same logic.
 
 ---
+
+## Building your own graph: `make_graph.py`
+
+`make_graph.py` is a command-line script that runs the pipeline from sections 3 to 6 at whatever settings you choose. It writes a single HTML file you can open in a browser or send to someone. The graph library is embedded, so the file doesn't need `lib/` next to it.
+
+```bash
+pip install -r requirements.txt
+python make_graph.py                              # γ=6, 10 communities, 200 per community → graph_res6_clusters.html
+python make_graph.py -r 3 -c 8 -p 100             # looser communities, smaller picture
+python make_graph.py -r 6 --color-by both -o out/g6   # out/g6_clusters.html + out/g6_roles.html
+python make_graph.py -r 6 --json g6.json          # also save stats + keywords as JSON
+python make_graph.py --help                       # list all options
+```
+
+It needs `graph.pkl` and `metrics.pkl`, and optionally `user_word_counts.pkl` (without it there's no keyword legend). While it runs, it prints the community count, nodes and edges drawn, the share of edges inside communities, and each cluster's keywords.
+
+### Graph shape
+
+| Argument | Default | What it does |
+|---|---|---|
+| `-r`, `--resolution` | `6.0` | Louvain's γ: how much denser than random chance a group must be to count as a community. Higher γ means more, smaller, tighter communities. Around 1 gives a few large, loose groups that change a lot between seeds; 6 scored best on this graph (see section 3); 8 to 10 is the most stable, but the keywords turn generic. It changes which users are grouped together, so it affects everything else. Must be greater than 0. |
+| `-c`, `--communities` | `10` | How many communities to draw, largest first, from those that pass `--min-size`. The rest still count toward "communities found" but aren't drawn and get no legend entry. Only 10 colors exist, so past 10 they repeat. |
+| `-p`, `--peel-to` | `200` | The most members drawn per community. Larger communities are trimmed to their dense core by removing the member with the weakest ties inside the community, one at a time (section 4). Smaller ones are drawn whole. It only affects the drawing; keywords always use the full community. Total nodes drawn ≤ `communities × peel-to`, slightly less because nodes left with no edges are dropped. |
+| `--min-size` | `30` | Communities with fewer members are discarded first, so tiny cliques don't count. Affects "communities found" and which communities `-c` can pick. |
+| `--seed` | `42` | Louvain's random seed. The same seed and settings produce the same graph every time. Try a few seeds to see how much the groups depend on chance; at a good γ they should look mostly the same. |
+
+### Output
+
+| Argument | Default | What it does |
+|---|---|---|
+| `--color-by` | `community` | `community`: one color per community, with the TF-IDF keyword legend. `role`: color by user role (Advisor, Debater, Bridge, Bridge-Debater; see section 2), with a role legend. `both`: writes both files from the same drawn nodes. |
+| `-o`, `--out` | `graph_res<γ>` | The start of the output file name. The script appends `_clusters.html` and/or `_roles.html`. It can include folders (`out/g6` → `out/g6_clusters.html`); missing folders are created and existing files are overwritten. |
+| `--json` | off | Also saves the run's stats and keywords to this file as JSON, in the same shape as one entry of `docs/manifest.json`: `gamma`, `file`, `communities_found`, `nodes_drawn`, `edges_drawn`, `intra_pct`, `coverage_pct`, `keywords`. |
+| `--data-dir` | the script's folder | The folder containing `graph.pkl`, `metrics.pkl` and `user_word_counts.pkl`. |
+
+### TF-IDF legend
+
+These only change the keyword legend, never the graph. See section 5 for the math.
+
+| Argument | Default | What it does |
+|---|---|---|
+| `-k`, `--keywords` | `6` | Words listed per cluster, highest TF-IDF first. A cluster can show fewer if not enough words pass the two filters below. |
+| `--min-users` | `4` | A word counts for a cluster only if at least this many different members used it, so one prolific poster can't define the cluster. Raise it if the keywords look like one person's vocabulary; lower it if small clusters show "no distinctive terms". |
+| `--min-corpus` | `15` | A word must appear at least this many times across all drawn clusters combined. This removes typos and one-off words that would otherwise score high just for being rare. |
+| `--stopwords` | `180` | Removes the N most-used words across all users before scoring. Words like "school", "college" and "gpa" are used by everyone on A2C, so they don't tell clusters apart. Raise it if the legend is full of generic words; `0` turns this filter off. |
+
+**Mismatched user IDs:** if `user_word_counts.pkl` was built while usernames were hashed twice and `graph.pkl` uses single hashing, the script detects it, converts the IDs, and prints a note. Without that, every legend would be empty with no error.
 
 ## Running the live app
 
@@ -203,6 +248,4 @@ streamlit run app.py
 
 Put `r_ApplyingToCollege_comments.jsonl` in the repo root and run `main.ipynb`. Things to watch for:
 
-- The notebook's word-count cell hashes usernames **twice** (`anonymize(anonymize(u))`), because the kernel that created the current `graph.pkl` ran the anonymize cell twice. If you rebuild `graph.pkl` with a clean top-to-bottom run, remove the second call, or no comment text will match a graph node.
-- Cells 4 and 5 use a `posts_df` that is never loaded. They aren't needed for the graph and can be skipped.
 - `user_word_counts.pkl` is built once from the raw file. After that, re-runs at a different γ reuse it.

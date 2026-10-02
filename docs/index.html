@@ -16,7 +16,7 @@
     --muted: #ffffff;
     --rule: #000000;
     --rule-strong: #000001;
-    --accent: #387939;
+    --accent: #2bbf2d;
     --accent-soft: #000000;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
   }
@@ -31,10 +31,10 @@
     -webkit-font-smoothing: antialiased;
     padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
   }
-  h1, h2, .label, .mono, .stat { font-family: "Georgia", Times, sans-serif; }
+  h1, h2, .label, .mono, .stat { font-family: "Times New Roman", Times, sans-serif; }
   .page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; display: flex; flex-direction: column; gap: 1.75rem; }
   header { display: flex; flex-direction: column; gap: .6rem; border-bottom: 1px solid var(--rule-strong); padding-bottom: 1.5rem; }
-  .label { font-family: "Arial", ui-monospace, Menlo, monospace; font-size: .68rem; font-weight: 500; letter-spacing: .16em; text-transform: none; color: var(--muted); }
+  .label { font-family: "Arial", ui-monospace, Menlo, monospace; font-size: .68rem; font-weight: 500; letter-spacing: .1em; text-transform: none; color: var(--muted); }
   h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 700; letter-spacing: -.03em; color: var(--ink); margin: 0; text-wrap: balance; }
   .dek { font-size: 1.02rem; color: var(--muted); max-width: 68ch; margin: 0; }
 
@@ -58,10 +58,10 @@
   .kw-row b { color: var(--ink); font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .78rem; }
   .kw-row span.words { font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .8rem; color: var(--muted); }
 
-  .note { font-size: .88rem; color: var(--muted); padding: 0 .1rem; }
+  .note { font-size: .95rem; color: var(--muted); padding: 0 .1rem; }
   .note strong { color: var(--ink-2); }
 
-  footer { border-top: 1px solid var(--rule-strong); padding-top: 1.2rem; font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .72rem; color: var(--muted); line-height: 1.8; }
+  footer { border-top: 1px solid var(--rule-strong); padding-top: 0.1rem; font-family: "Georgia", ui-monospace, Menlo, monospace; font-size: .9rem; color: var(--muted); line-height: 1.8; }
   a { color: var(--accent); }
 
   @media (max-width: 620px) {
@@ -73,9 +73,9 @@
 <div class="page">
 
   <header>
-    <span class="label">r/ApplyingToCollege: comment network</span>
+    <span class="label">r/APPLYINGTOCOLLEGE COMMENT NETWORK</span>
     <h1>A2C Reply Network</h1>
-    <p class="dek">Every user who repeatedly replies to another is an edge, weighted by how often it happened. Communities are found with Louvain at a resolution (γ) you set below — drag the slider between 9 precomputed snapshots.</p>
+    <p class="dek">Every user (represented by a circle) who repeatedly replies to another is an edge (line between each user), weighted by how often it happened (thickness of the line). Communities are found with the Louvain method at a resolution (γ) you can set below. Drag the slider between 9 precomputed layouts.</p>
   </header>
 
   <div class="panel">
@@ -91,11 +91,11 @@
     <div class="keywords" id="keywordsPanel"></div>
   </div>
 
-  <p class="note">This is a <strong>static snapshot gallery</strong>, not a live recomputation — moving the slider swaps between 9 precomputed pictures (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. For continuous parameter tuning with live recomputation, run the companion <span class="mono" style="font-family:'Georgia',monospace">app.py</span> Streamlit dashboard instead — GitHub Pages can't run a live Python backend, so it can't host that version.</p>
+  <p class="note">This is a <strong>not</strong> a live recomputation. Moving the slider swaps between 9 precomputed graphs (γ = 1, 2, 3, 4, 5, 6, 7, 8, 10), each with 10 communities drawn, trimmed to their 100 most-connected members. Github pages unfortunately cannot host live recomputations with any resolution of your choosing.</p>
 
   <footer>
-    Source: r_ApplyingToCollege_comments.jsonl (1.94M comments) · graph: 9,605 nodes, 16,702 edges · Louvain (networkx), seed 42<br>
-    Node size = PageRank · edge length/thickness = reply weight (log-compressed) · legend keywords = TF-IDF over each community's full membership
+    <strong>Sources:</strong> r_ApplyingToCollege_comments.jsonl (1.94M comments) <br> - Original Graph: 9,605 nodes, 16,702 edges <br> - Louvain Method ( with networkx), seed 42<br>
+    - Node size = PageRank <br> - Edge Length/Thickness = reply weight (log-compressed) <br> - Legend Keywords = TF-IDF over each community's full membership and their comments
   </footer>
 
 </div>
